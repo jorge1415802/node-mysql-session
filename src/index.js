@@ -1,6 +1,6 @@
 var express = require('express');
 var morgan = require('morgan');
-var exphbs = require('express-hamdlebars');
+var exphbs = require('express-handlebars');
 var path = require('path');
 var app = express();
 
@@ -17,12 +17,20 @@ app.engine('.hbs',exphbs({
 app.set('view engine','.hbs');
 //Middlewares
 app.use(morgan('dev'));
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
 
 // variables globales
+app.use((req,res,next) => {
+  next();
+});
 
 // routes
 app.use(require('./routes'));
+app.use(require('./routes/autenticacion'));
+app.use('/enlaces',require('./routes/enlaces'));
 // public
+app.use(express.static(path.join(__dirname,'public')));
 
 // starting server
 app.listen(app.get('port'),() => {
