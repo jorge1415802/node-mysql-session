@@ -9,9 +9,18 @@
             </a>
             <p class="m-2 text-center">{{Descripcion}}</p>
             <p class="m-2">Fecha: {{Fecha_Creacion}}</p>
+            <a href="/enlaces/borrar/{{IdEnlace}}" class="btn btn-danger">Borrar Enlace</a>
+            <a href="/enlaces/editar/{{IdEnlace}}" class="btn btn-warning">Editar</a>
           </div>
         </div>
       </div>
+      {{else}}
+        <div class="col-md-4 mx-auto">
+          <div class="card card-body text-center">
+            <p>No se crearon enlaces aun</p>
+            <a href="/enlaces/agregar">Crear Uno</a>
+          </div>
+        </div>
     {{/each}}
   </div>
 </div>
